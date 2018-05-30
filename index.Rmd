@@ -5,6 +5,10 @@
 
 <img src="images/kevin.jpg" style="width:25%; border:10px solid; margin-right: 20px" align="left">
 
-I like to analyze data and to plan experiments to discover new things about cancer. Currently, I am an Associate Professor of Oncology at [Roswell Park Comprehensive Cancer Center](https://www.roswellpark.org) in the Department of Biostatistics and Bioinformatics. 
+I am a mathematical statistician evolving slowly into a cancer researcher.  Driven by data, we use statistical and computational models to learn new things about cancer.  In 2017, we started a small "wet lab" to test our dry bench predictions. 
 
-My full CV is available [here](files/engcv-2018-0326.pdf).
+My research group collaborates across clinical and translational fields attempting to use data to learn more about cancer.  Our primary fields of experience are molecular genomics and immunotherapy. 
+
+Currently, I am an Associate Professor of Oncology at [Roswell Park Comprehensive Cancer Center](https://www.roswellpark.org) in the Department of Biostatistics and Bioinformatics. I earned my MS and PhD from the [University of Wisconsin-Madison](http://www.stat.wisc.edu) and cross-trained in [medical informatics and computation](http://www.cibm.wisc.edu) as a postdoc. I recently completed a [K01 award in Biomedical Informatics](https://projectreporter.nih.gov/project_info_description.cfm?projectnumber=5K01LM012100-03). 
+
+My full CV is available [here](files/engcv-2018-0326.pdf) and a comprehensive list of publications can be found at [Google Scholar](https://scholar.google.com/citations?user=ScCJOFgAAAAJ).

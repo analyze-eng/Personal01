@@ -1,0 +1,21 @@
+---
+---
+
+In Fall 2018, I am responsible for components of two courses in the Roswell Graduate Division.
+
+<div>
+<h1>Integrated Cancer Sciences, Unit 3</h1>
+Omics is the 
+</div>
+
+
+<div>
+<h1>Integrated Cancer Sciences, Integrated Exercise 1</h1>
+
+</div>
+
+
+<div>
+<h1>RPG554: Cancer Immunology Bioinformatics</h1>
+Bioinformatics is multi-disciplinary synergizing computer science, molecular biology, and statistics.  It entails in-depth comparative and statistical analyses of massive amounts of genomic and protein data through the use of intensive data mining by sophisticated computer softare to solve biologic problems.  Advanced technologies such as Next-Generation Sequencing (NGS), have led to such data sets with ptoentially enormous impact, particularly to cancer biology and immunology.  This course is designed for doctoral students to understand, utilize and apply bioinformatics to solving problems in cancer immunology.  The cousre will focus on the application of bioinformatics to the following key elements of cancer immunology: innate and adaptive immune profiles, cytokine and chemokine signaling; and neo-antigen discovery.  
+</div>

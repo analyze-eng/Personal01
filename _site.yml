@@ -1,9 +1,9 @@
 name: "name"
 output_dir: "."
 navbar:
-  title: "Title"
+  title: "Kevin H. Eng"
   left:
-    - text: "Writing"
+    - text: "Research"
       href: research.html
     - text: "Speaking"
       href: talk.html
@@ -16,7 +16,6 @@ navbar:
       href: contact.html
     - icon: fa-github fa-lg
       href: http://github.com/analyze-eng
-    - icon: fa-twitter fa-lg
     - icon: fa-linkedin fa-lg
 output:
   html_document:
