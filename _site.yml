@@ -1,0 +1,24 @@
+name: "name"
+output_dir: "."
+navbar:
+  title: "Title"
+  left:
+    - text: "Writing"
+      href: research.html
+    - text: "Speaking"
+      href: talk.html
+    - text: "Programming"
+      href: program.html
+    - text: "Teaching"
+      href: teach.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: contact.html
+    - icon: fa-github fa-lg
+      href: http://github.com/analyze-eng
+    - icon: fa-twitter fa-lg
+    - icon: fa-linkedin fa-lg
+output:
+  html_document:
+    theme: paper
+    css: 'styles.css'
