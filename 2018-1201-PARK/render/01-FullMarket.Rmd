@@ -1,0 +1,51 @@
+---
+title: "Market Full, Strict Lower Bound strategy"
+---
+
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+```{r global_options, echo = FALSE, include = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      cache = FALSE, tidy = FALSE, size = "small")
+```
+
+It's unlikely we can drive enrollment assuming we can fill a large order for full pay students.  Further it is unrealistic to fully ignore the contribution of students who pay less than full tuition and more than zero.  On the other extreme, the average model does not meet our need for financial diversity.  Whether the model could be deployed is not settled: one could object that there just aren't enough families in the area to pay the average tuition for all contracts (to be determined with actual numbers, please).  It is likely our final models will try to find the sweet spot where we can deviate from the average model in equal measure to fill seats.  
+
+Suppose now we go back and consdier the average tuition required in a grade if we had the same number of full pay students in each level. 
+```{r echo=FALSE, quote=""}
+## barbell
+target<-tapply(data[,4],data$grade,sum)
+dom<-data[data$nlevel!=20,]
+d3<-data[data$nlevel==20,]
+d3<-tapply(d3[,4],d3$grade,sum)
+d3[is.na(d3)]<-0
+intl<-d3
+cap<-c(15640,rep(17100,4),c(18170,18580,19890,20440,21770,22870,22870,22870))
+
+out<-
+cbind(target,intl,domestic=target-intl,TuitionCap=cap,AllSeats=table(data$grade),
+DomSeats=table(dom$grade),
+ IntlSeat=table(data$grade)-table(dom$grade),
+ FullPayNeeded=ceiling((target-intl)/cap),
+ ZeroPay = table(dom$grade)- ceiling((target-intl)/cap))
+```
+```{r echo=FALSE}
+tmp<-cbind(ActualFull=c(1,0,2,2,7,1,1,2,3,3,5,3,7))
+tmp<-cbind(tmp,Intl=out[,7],Seats=as.numeric(out[,5]-tmp-out[,7]),RevRemaining=target-cap*tmp[,1]-intl)
+tmp<-cbind(tmp,AvgReq=tmp[,4]/tmp[,3])
+round(tmp)
+```
+
+
+
+
+

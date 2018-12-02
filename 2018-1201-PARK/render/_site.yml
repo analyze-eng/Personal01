@@ -1,0 +1,25 @@
+name: "2018-1201-PARK-01"
+navbar: 
+  title: "Park Tuition Modeling 01"
+  left: 
+    - text: "Analysis: Tuition Model"
+      menu: 
+      - text: "Data Intake"
+        href: 01-analysis.html
+      - text: "Average"
+        href: 01-average.html
+      - text: "Barbell"
+        href: 01-barbell.html
+      - text: "Full Market"
+        href: 01-FullMarket.html
+      - text: "Census Data"
+        href: 02-censusdata.html
+
+  
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: styles.css

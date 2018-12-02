@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Census Data by Town</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Park Tuition Modeling 01</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis: Tuition Model
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01-analysis.html">Data Intake</a>
+    </li>
+    <li>
+      <a href="01-average.html">Average</a>
+    </li>
+    <li>
+      <a href="01-barbell.html">Barbell</a>
+    </li>
+    <li>
+      <a href="01-FullMarket.html">Full Market</a>
+    </li>
+    <li>
+      <a href="02-censusdata.html">Census Data</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Census Data by Town</h1>
+
+</div>
+
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+<p>Based on some conversations about market, it may be useful to examine the trends at a township level across Erie county. I pulled this data from <a href="https://www.census.gov/quickfacts/fact/map/">US Census QuickFacts</a>. It has the following variables.</p>
+<pre><code>##       [,1]                                                                                    
+##  [1,] &quot;Persons under 18 years, percent&quot;                                                       
+##  [2,] &quot;White alone, not Hispanic or Latino, percent&quot;                                          
+##  [3,] &quot;Median value of owner-occupied housing units, 2012-2016&quot;                               
+##  [4,] &quot;Households, 2012-2016&quot;                                                                 
+##  [5,] &quot;Bachelor&#39;s degree or higher, percent of persons age 25 years+, 2012-2016&quot;              
+##  [6,] &quot;Median household income (in 2016 dollars), 2012-2016&quot;                                  
+##  [7,] &quot;Persons in poverty, percent&quot;                                                           
+##  [8,] &quot;Language other than English spoken at home, percent of persons age 5 years+, 2012-2016&quot;
+##  [9,] &quot;Mean travel time to work (minutes), workers age 16 years+, 2012-2016&quot;</code></pre>
+<p>Roughly the clusters are:</p>
+<pre><code>## $`1`
+## [1] &quot;Buffalo&quot;     &quot;Cheektowaga&quot; &quot;Tonawanda&quot;   &quot;WestSeneca&quot;  &quot;Lewiston&quot;   
+## 
+## $`2`
+## [1] &quot;Newstead&quot; &quot;Elma&quot;     &quot;Marilla&quot;  &quot;Alden&quot;    &quot;Boston&quot;   &quot;Evans&quot;    &quot;Eden&quot;     &quot;Royalton&quot;
+## 
+## $`4`
+## [1] &quot;Lancaster&quot;   &quot;Amherst&quot;     &quot;Hamburg&quot;     &quot;Lockport&quot;    &quot;Pendleton&quot;   &quot;Wheatfield&quot;  &quot;GrandIsland&quot;
+## 
+## $`5`
+## [1] &quot;Clarence&quot;    &quot;Aurora&quot;      &quot;OrchardPark&quot;</code></pre>
+<p>and their relative compositions are</p>
+<pre><code>##                                                                                  1          2         4         5
+## Persons under 18 years, percent                                               0.19      0.190      0.21      0.22
+## White alone, not Hispanic or Latino, percent                                  0.88      0.960      0.91      0.95
+## Median value of owner-occupied housing units, 2012-2016                  119800.00 161700.000 179400.00 223700.00
+## Households, 2012-2016                                                     32801.00   3320.000   8135.00  11487.00
+## Bachelor&#39;s degree or higher, percent of persons age 25 years+, 2012-2016      0.28      0.265      0.32      0.47
+## Median household income (in 2016 dollars), 2012-2016                      55081.00  63014.000  71105.00  88467.00
+## Persons in poverty, percent                                                   0.08      0.045      0.08      0.04
+## Language other than English spoken at home                                    0.07      0.030      0.05      0.04
+## Mean travel time to work (minutes), workers age 16 years+, 2012-2016         20.50     25.650     21.80     22.50</code></pre>
+<p>t-SNE Plots reflect multivariate distance. I’ve colored them here by specific factors. Note that this distance omits the use of number of households.<br />
+<img src="02-censusdata_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="02-censusdata_files/figure-html/unnamed-chunk-4-2.png" width="672" /><img src="02-censusdata_files/figure-html/unnamed-chunk-4-3.png" width="672" /><img src="02-censusdata_files/figure-html/unnamed-chunk-4-4.png" width="672" /></p>
+<p>That Alden number probably includes the prison population (best guess, households x avg/household - actual population leaves about 1800 unaccounted for: Wende and ECHF make up maybe 1600 max).</p>
+<p>There’s a variable about foreign born persons I could add.</p>
+
+<p>Not for Distribution. 2018.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

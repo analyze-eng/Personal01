@@ -1,0 +1,11 @@
+---
+title: "Park Tuition Analysis"
+---
+
+In December 2018, Jeremy asked us to look into the tuition model and make some predictions about implementation and sustainability of the program in a way that can meet future cash flow needs.  
+
+This analysis is based on data collected by Carol Hasegawa on tuition ranges and rates.
+It would be significantly improved by 
+
+1. specific data on actual tuition charged and received
+2. etc.

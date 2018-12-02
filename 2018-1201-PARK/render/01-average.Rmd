@@ -1,0 +1,60 @@
+---
+title: "Average Strategy"
+---
+
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+```{r global_options, echo = FALSE, include = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      cache = FALSE, tidy = FALSE, size = "small")
+```
+
+
+```{r echo=FALSE}
+load("..//2018-1201-parkgrid18.rdata")
+tmax<-c(12,14,14,14,14,15,15,16,17,18,19,19,19)
+
+```
+
+
+### Average Strategy
+First, we could just set the tuition to the across the board average.
+
+```{r echo=FALSE}
+data2<-data.frame(grade=data$grade,nlevel=mean(data$nlevel),bracketavg=mean(data[,4]))
+plot(as.numeric(data2$grade),jitter(data2$nlevel,factor=2),cex=2,ylim=c(1,20),
+ axes=FALSE,ann=FALSE,bg="#00000055",pch=21,col=NA)
+axis(1,at=1:13,labels=c("K",1:12))
+axis(2)
+box()
+title(xlab="Grade Level",ylab="Tuition Level",main="Average Strategy")
+```
+
+Then by construction, the metrics before are similar. 
+
+Total Tuition Explained 
+```{r,echo=FALSE}
+sum(data2$bracketavg) ## Total tuition explained
+```
+Number of Students
+```{r,echo=FALSE}
+nrow(data2) ## Number of students
+```
+Enrollment by Grade Distribution
+```{r,echo=FALSE}
+table(data2$grade)  ## student distribution
+```
+
+Run through standard concerns.
+* There's no structural reason it couldn't be set this way: kindergarten market price is $15,000 which is higher than the set average.  
+* Can you find these students?  Probably given that you can fill seats at full price.
+* The main downfall is abrogating any interest in economic diversity.

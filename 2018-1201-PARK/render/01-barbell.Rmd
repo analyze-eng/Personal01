@@ -1,0 +1,92 @@
+---
+title: "Barbell Strategy"
+---
+
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+```{r global_options, echo = FALSE, include = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      cache = FALSE, tidy = FALSE, size = "small")
+```
+
+```{r echo=FALSE}
+load("..//2018-1201-parkgrid18.rdata")
+tmax<-c(12,14,14,14,14,15,15,16,17,18,19,19,19)
+```
+
+Assume per grade you give out slots for max tuition rate until you fill the class quota.  Number of remaining seats?
+
+
+```{r echo=FALSE, quote=""}
+## barbell
+target<-tapply(data[,4],data$grade,sum)
+dom<-data[data$nlevel!=20,]
+d3<-data[data$nlevel==20,]
+d3<-tapply(d3[,4],d3$grade,sum)
+d3[is.na(d3)]<-0
+intl<-d3
+cap<-c(15640,rep(17100,4),c(18170,18580,19890,20440,21770,22870,22870,22870))
+
+out<-
+cbind(target,intl,domestic=target-intl,TuitionCap=cap,AllSeats=table(data$grade),
+DomSeats=table(dom$grade),
+ IntlSeat=table(data$grade)-table(dom$grade),
+ FullPayNeeded=ceiling((target-intl)/cap),
+ ZeroPay = table(dom$grade)- ceiling((target-intl)/cap))
+round(out)
+```
+
+Okay check our work
+
+```{r echo=FALSE}
+data3<-data.frame(grade=factor(rep(rownames(out),times=out[,5]),c("K",1:12)),
+   price=unlist(apply(out,1,function(x) rep(c(x[4],0,31500),times=c(x[8],x[9],x[7]) ))),
+   nlevel=unlist(apply(cbind(tmax,out[,-1]),1,function(x) rep(c(x[1],6,20),times=c(x[8],x[9],x[7]) )))
+  )
+
+plot(as.numeric(data3$grade),jitter(data3$nlevel,factor=2),cex=2,
+ axes=FALSE,ann=FALSE,bg=c("#00000055","#0000FF55","#FF000055")[1+(data3$nlevel==20)+2*(data3$nlevel==1)],
+  pch=21,col=NA)
+box()
+axis(1,at=c(1:13),labels=c("K",1:12))
+axis(2)
+title(xlab="Grade Level",ylab="Tuition Level",main="Barbell Strategy")
+tmax<-c(12,14,14,14,14,15,15,16,17,18,19,19,19)
+segments(x0=(1:13)-.5,x1=(1:13)+.5,y0=tmax,y1=tmax,lwd=3,col="blue")
+text(x=1:13,y=6,out[,9],col=2,cex=2)
+text(x=1:13,y=9,out[,8],col=1,cex=2)
+
+```
+
+Total Tuition Explained 
+```{r,echo=FALSE}
+sum(data3$price) ## Total tuition explained
+```
+Number of Students
+```{r,echo=FALSE}
+nrow(data3) ## Number of students
+```
+Enrollment by Grade Distribution
+```{r,echo=FALSE}
+table(data3$grade)  ## student distribution
+```
+
+Numbers on the plot give the exact number of students required (black) and number of free slots open (red).  Can you hit this in practice?  Well it looks like the school is very far off.  Just to recap: you probably couldn't fully fund the school with full pay students. This means the argument that sets full pay and tuition discounted students in opposition is a fallacy.  One might recast this narrative by recognizing that the fact that most of the students pay something (and we can't find this full pay market) is what keeps tuition working.  A different corollary is that the zero pay student number here is roughly the number of vacancies the system could take and break even at the same revenue.
+
+```{r echo=FALSE}
+tmp<-cbind(out[,c(8,9)],ActualFull=c(1,0,2,2,7,1,1,2,3,3,5,3,7))
+cbind(tmp,PropFull=round(tmp[,3]/tmp[,1],2))
+```
+
+Now in practice, there aren't really that many zero-pay students so really, "students paying anything" is what lets us relax the upper bound on the tuition.
+
+

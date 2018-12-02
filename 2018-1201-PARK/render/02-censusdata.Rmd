@@ -1,0 +1,93 @@
+---
+title: "Census Data by Town"
+---
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+```{r global_options, echo = FALSE, include = FALSE}
+options(width = 999)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      cache = FALSE, tidy = FALSE, size = "small")
+```
+
+Based on some conversations about market, it may be useful to examine the trends at a township level across Erie county.  I pulled this data from [US Census QuickFacts](https://www.census.gov/quickfacts/fact/map/).  It has the following variables.
+
+```{r echo=FALSE}
+cens<-read.csv("..//Census QuickFacts Dec-01-2018.csv",row.names=1,nrow=9)#,colClasses="numeric")
+colnames(cens)<-gsub("\\.","",colnames(cens))
+colnames(cens)<-gsub("CountyNewYork","",colnames(cens))
+colnames(cens)<-gsub("townErie","",colnames(cens))
+colnames(cens)<-gsub("cityNewYork","",colnames(cens))
+colnames(cens)<-gsub("townNiagara","",colnames(cens))
+cens<-as.matrix(cens)
+class(cens)<-"numeric"
+cens<-t(cens)
+
+as.matrix(colnames(cens))
+
+library(Rtsne)
+library(circlize)
+set.seed(808)
+fit<-Rtsne(scale(cens)[,-4],perplex=1)
+Y<-fit$Y
+rownames(Y)<-rownames(cens)
+KM<-kmeans(Y,center=6)$cluster
+KM[KM==6]<-4
+KM[KM==3]<-1
+```
+
+Roughly the clusters are:
+```{r echo=FALSE}
+tapply(rownames(Y),KM,c)
+```
+and their relative compositions are
+```{r echo=FALSE}
+cx<-t(data.frame(cluster=KM,cens))[,order(KM)]
+cx<-t(apply(cx[-1,],1,function(x)tapply(x,cx[1,],median)))
+rownames(cx)<-colnames(Z)
+cx
+```
+
+
+t-SNE Plots reflect multivariate distance.  I've colored them here by specific factors. Note that this distance omits the use of number of households.  
+```{r echo=FALSE}
+
+grad<-colorRamp2(c(-2,0,2),c("purple","grey","orange"))
+Z<-scale(cens)
+colnames(Z)[8]<-"Language other than English spoken at home"
+k<-3
+plot(fit$Y,type="n",axes=FALSE,ann=FALSE)
+text(fit$Y,label=rownames(Y),xpd=NA,col=grad(Z[,k]))
+title(main=colnames(Z)[k])
+legend("bottomright",fill=c("orange","purple"),legend=c("High","Low"))
+
+k<-8
+plot(fit$Y,type="n",axes=FALSE,ann=FALSE)
+text(fit$Y,label=rownames(Y),xpd=NA,col=grad(Z[,k]))
+title(main=colnames(Z)[k])
+legend("bottomright",fill=c("orange","purple"),legend=c("High","Low"))
+
+k<-9
+plot(fit$Y,type="n",axes=FALSE,ann=FALSE)
+text(fit$Y,label=rownames(Y),xpd=NA,col=grad(Z[,k]))
+title(main=colnames(Z)[k])
+legend("bottomright",fill=c("orange","purple"),legend=c("High","Low"))
+
+k<-2
+plot(fit$Y,type="n",axes=FALSE,ann=FALSE)
+text(fit$Y,label=rownames(Y),xpd=NA,col=grad(Z[,k]))
+title(main=colnames(Z)[k])
+legend("bottomright",fill=c("orange","purple"),legend=c("High","Low"))
+
+```
+
+That Alden number probably includes the prison population (best guess, households x avg/household - actual population leaves about 1800 unaccounted for: Wende and ECHF make up maybe 1600 max).
+
+There's a variable about foreign born persons I could add.
